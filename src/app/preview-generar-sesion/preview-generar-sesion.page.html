@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generar sesiones de entrenamiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <hr style="margin-top: -1px;">
+  <ion-grid class="ion-no-padding" no-padding>
+    <ion-row class="ion-no-padding" no-padding>
+      <ion-col style="text-align: center; " size="7" class="ion-no-padding" no-padding>
+        <ion-text style="color: #303030;"><strong>Seleecione una sesion:</strong></ion-text>
+      </ion-col>
+      <ion-col size="1" style="text-align: center; " class="ion-no-padding" no-padding>
+      </ion-col>
+      <ion-col size="4" style="line-height: 40%; text-align: center; text-align: justify;" class="ion-no-padding"
+        no-padding>
+        <ion-text style=" color: #89c53f; font-size:8px; text-align: justify;">A continuación porfavor seleccione una
+          sesion para generar sesiones de entrenamiento.</ion-text>
+      </ion-col>
+    </ion-row>
+    
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col class="ion-align-items-center" size="12">
+          <ion-list lines="full" *ngFor="let quizz of this.quizzes_de_equipo let i= index" class="ion-align-items-center" no-padding>
+          <ion-item>
+
+            <ion-text><p>{{quizz.dia_sesion}} a las {{quizz.hora_sesion}}<br>Lugar: <ion-text>{{quizz.lugarsesion}} </ion-text> </p></ion-text>
+            <div class="ion-text-left">
+              <ion-button size="small" (click)="IRAGENERARSESION($event, quizz, i)"><ion-icon name="create"></ion-icon></ion-button>
+              <ion-label class="v2-badge v2-badge-tiene" *ngIf="quizz.cantidad_ejercicios>0">Tiene</ion-label>
+              <ion-label class="v2-badge v2-badge-notiene" *ngIf="quizz.cantidad_ejercicios<1">No Tiene</ion-label>
+            </div>
+
+          </ion-item>
+        </ion-list>
+
+        </ion-col>
+        <ion-col>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+      <!-- <ion-row class="ion-align-items-center" no-padding>
+        <ion-col size="4" style=" text-align: center;  " class="ion-no-padding" no-padding>
+          <ion-text>Cuestionario de la sesion del dia:</ion-text>
+        </ion-col>
+        <ion-col size="5" style="text-align: center; " class="ion-no-padding" no-padding>
+          <ion-input type="date" readonly="true" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY"
+            value="{{quizz.dia_sesion}}">
+          </ion-input>
+        </ion-col>
+        <ion-col size="3" style="text-align: center; " class="ion-no-padding" no-padding>
+          <ion-row class="ion-align-items-center" no-padding>
+            <ion-col size="12" style=" text-align: center;" class="ion-no-padding" no-padding>
+              <ion-text>a las:</ion-text> <br>
+              {{quizz.hora_sesion}}<br>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-align-items-center" no-padding>
+            <ion-col *ngIf="this.tipo_cuenta>4&&this.tipo_cuenta<10" size="12" style=" text-align: center; "
+              class="ion-no-padding" no-padding>
+              <ion-text style="font-size:10px; background-color: #89c53f50; border-radius: 3px;">Sin Permios</ion-text>
+            </ion-col>
+            <ion-col *ngIf="this.tipo_cuenta>9" size="12" style=" text-align: center;" class="ion-no-padding"
+              no-padding>
+              <ion-text (click)="IRAGENERARSESION($event, quizz, i)"
+                style="font-size:10px; background-color: #89c53f; border-radius: 3px;">Generar Sesiones</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row> -->
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,135 @@
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+#js-licensing {
+  display: none !important;
+}
+
+ion-modal {
+  &.modalfechanacimiento {
+    --width: calc(100% - 2em);
+    align-items: center;
+    --height: auto;
+    .ion-page {
+      position: relative;
+      display: block;
+      contain: content;
+    }
+  }
+}
+ion-title {
+  text-align: center;
+  padding: 0 78px 0;
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  font-weight: 900;
+  font-family: serif;
+  color: rgb(32, 32, 32);
+  font-style: inherit;
+  font-variant: small-caps;
+  font-size: 16px;
+}
+.diasentrenos {
+    // background-color: linear-gradient(to left, #ff0000 50%, #0000ff 50%);
+  // background-color: rgb(46, 53, 191) !important;
+  border-top: #90fc88 !important;
+  border-bottom-width: thin !important;
+  border-top-style: solid !important;
+  p {
+    color: rgb(112, 255, 2) !important;
+  }
+}
+.diaspartidos {
+  // background-color: red !important;
+  border-bottom: #f53d3d !important;
+  border-top-width: thin !important;
+  border-bottom-style: solid !important;
+  p {
+    color: var(--ion-color-danger) !important;
+  }
+}
+
+
+.diaspartidosyentrenos {
+  border-top: #90fc88 !important;
+  // border-bottom-width: thin !important;
+  border-top-style: solid !important;
+  // background-color: red !important;
+  border-bottom: #f53d3d !important;
+  // border-top-width: thin !important;
+  border-bottom-style: solid !important;
+p {
+  color: var(--ion-color-danger) !important;
+}
+}
+
+#calendariox{
+  .title{
+    // max-width: 80vh;
+    background-color: var(--ion-color-light);
+    ion-button.back {
+      -webkit-clip-path: polygon(100% 100%, 100% 0, 0 50%);
+      clip-path: polygon(100% 100%, 100% 0, 0 50%);
+      background: var(--ion-color-primary);
+
+    }
+    ion-button.forward {
+      -webkit-clip-path: polygon(0 0, 0 100%, 100% 50%);
+      clip-path: polygon(0 0, 0 100%, 100% 50%);
+      background: red;
+      background-color: var(--ion-color-primary);
+
+    }
+
+  }
+}
+
+
+.centrar {
+  margin-left: auto;
+  margin-right: auto;
+}
+.cartaresponsive1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media screen and (min-width: 767px) {
+  .cartaresponsive2 {
+    width: 600px;
+    margin: auto;
+  }
+}
+
+
+// inicia modalcalendario
+ion-modal.detalles_calendario {
+  --height: 50%;
+  --width: 80vw;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+ion-modal.detalles_calendario::part(backdrop) {
+  background: rgba(209, 213, 219);
+  opacity: 1;
+}
+
+ion-modal.detalles_calendario ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+// termina modal calendario

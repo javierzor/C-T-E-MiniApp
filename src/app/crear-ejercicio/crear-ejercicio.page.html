@@ -1,0 +1,340 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>crear ejercicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button (click)="volveraatras()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-text color="primary">Bienvenido a esta seccion<br>desde esta area usted podra registrar ejercicios para
+          esta sesion.</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+      </ion-col>
+      <ion-text>Ejercicio Nº <strong>{{this.muestralecualseraelnumerodesuejercicio}}</strong></ion-text>
+      <ion-col size="4">
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-text>Información previa del ejercicio</ion-text>
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-top: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   "
+      class="ion-align-items-center">
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Tipo de tarea</ion-text>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Jugadores por equipo</ion-text>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Numero de equipos</ion-text>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-text color="primary">Nivel Técnico Tactico</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-select interface="popover" style="font-size: small;" style="font-size: small;" placeholder="¿tarea?"
+          (ionChange)="B63($event)">
+          <ion-select-option value="Recuperación">Recuperación</ion-select-option>
+          <ion-select-option value="Core">Core</ion-select-option>
+          <ion-select-option value="Compensatorio">Compensatorio</ion-select-option>
+          <ion-select-option value="Calentamiento">Calentamiento</ion-select-option>
+          <ion-select-option value="Balón parado">Balón parado</ion-select-option>
+          <ion-select-option value="Fuerza">Fuerza</ion-select-option>
+          <ion-select-option value="Trabajo táctico">Trabajo táctico</ion-select-option>
+          <ion-select-option value="Circuito físico">Circuito físico</ion-select-option>
+          <ion-select-option value="Rueda de pases">Rueda de pases</ion-select-option>
+          <ion-select-option value="Juego reducido">Juego reducido</ion-select-option>
+          <ion-select-option value="Partido de entrenamiento">Partido de entrenamiento</ion-select-option>
+          <ion-select-option value="Partido oficial">Partido oficial</ion-select-option>
+          <ion-select-option value="1 vs 1">1 vs 1</ion-select-option>
+          <ion-select-option value="Sprint">Sprint</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-select interface="popover" style="font-size: small;" placeholder="¿rango?" (ionChange)="C63($event)">
+          <ion-select-option value="2 a 3">2 a 3</ion-select-option>
+          <ion-select-option value="4 a 6">4 a 6</ion-select-option>
+          <ion-select-option value="7 a 10">7 a 10</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-select interface="popover" style="font-size: small;" placeholder="Nro Eq..?" (ionChange)="D63($event)">
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="3">
+        <ion-select interface="popover" style="font-size: small;" placeholder="Nivel?" (ionChange)="E63($event)">
+          <ion-select-option value="bajo">bajo</ion-select-option>
+          <ion-select-option value="medio">medio</ion-select-option>
+          <ion-select-option value="alto">alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-top: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   "
+      class="ion-align-items-center">
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Intensidad de movimiento</ion-text>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">M2 / Jugador</ion-text>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Numero de balónes</ion-text>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-text color="primary">Interrupciones</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-select interface="popover" style="font-size: small;" placeholder="Int.?" (ionChange)="F63($event)">
+          <ion-select-option value="Parado (casi)">Parado (casi)</ion-select-option>
+          <ion-select-option value="Baja">Baja</ion-select-option>
+          <ion-select-option value="Media">Media</ion-select-option>
+          <ion-select-option value="Alta">Alta</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-input readonly value="{{this.mostrarmetroscuadradosporjugador}}"></ion-input>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-select interface="popover" style="font-size: small;" placeholder="Nº" (ionChange)="H63($event)">
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">>3</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="3">
+        <ion-select interface="popover" style="font-size: small;" placeholder="int." (ionChange)="I63($event)">
+          <ion-select-option value="Frecuentes">Frecuentes</ion-select-option>
+          <ion-select-option value="Casi siempre">Casi siempre</ion-select-option>
+          <ion-select-option value="Sin parar">Sin parar</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-top: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   "
+      class="ion-align-items-center">
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Jugadores totales (sin portero)</ion-text>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Lado 1 (mts)</ion-text>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center" style="border-right: 1px solid #74af2d;">
+        <ion-text color="primary">Lado 2 (mts)</ion-text>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-text color="primary">m/2 Jugador</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row (ionChange)="recalculadodeM2PORjug()"
+      style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-input (ionChange)="B15($event)" placeholder="0"></ion-input>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-input (ionChange)="C15($event)" placeholder="0"></ion-input>
+      </ion-col>
+      <ion-col size="3" style="border-right: 1px solid #74af2d;">
+        <ion-input (ionChange)="D15($event)" placeholder="0"></ion-input>
+      </ion-col>
+      <ion-col size="3">
+        <ion-input readonly value="{{this.e15}}" type="number" id="numberInput"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-no-padding" no-padding>
+      <ion-col size="4" class="ion-text-center ion-no-padding">
+      </ion-col>
+      <ion-col size="4" class="ion-text-center ion-no-padding">
+        <ion-card color="white" class="ion-no-padding" no-padding>
+          <ion-card-header class="ion-no-padding" no-padding>
+            <ion-card-title style="font-size: small;" class="ion-no-padding" no-padding>Valor<br></ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding" no-padding>
+            <ion-input ionChange="ONCHANGEvalor($event)" placeholder="valor"></ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center ion-no-padding">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-text>Descripción</ion-text>
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-card color="white">
+          <ion-item>
+            <ion-textarea (ionChange)="ONCHANGEcomentario($event)" rows="2" style=" background-color: #ececec;"
+              placeholder="Agg. una nota aqui..." autoGrow="true" color="primary" value=" "></ion-textarea>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <br>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="6">
+        <img src="assets/cancha.svg">
+      </ion-col>
+      <ion-col size="6">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6">
+            <ion-button>
+              <ion-icon name="push-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text style="color:#999999; font-size: small;"> Usted puede reemplazar la imagen estrategica aplicada en
+              este ejercicio.</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-col size="12">
+      <ion-item color="white" lines="none">
+        <ion-text>Cualificación de la carga del ejercicio:</ion-text>
+      </ion-item>
+    </ion-col>
+    <ion-row style="border-top: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   "
+      class="ion-align-items-center">
+      <ion-col size="4" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Contar</ion-text>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Int trabajo</ion-text>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Volumen trabajo</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row (ionChange)="recalcularcarga()"
+      style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
+      <ion-col size="4" style="border-right: 1px solid #74af2d;">
+        <ion-select (ionChange)="Changecontrar($event)" interface="popover" style="font-size:10px;" placeholder="SI">
+          <ion-select-option value="SI">SI</ion-select-option>
+          <ion-select-option value="NO">NO</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;">
+        <ion-select (ionChange)="Changeintensidadtrabajo($event)" interface="popover" style="font-size:10px;"
+          placeholder="6-20">
+          <ion-select-option value="5.09">6</ion-select-option>
+          <ion-select-option value="6.61">7</ion-select-option>
+          <ion-select-option value="8.39">8</ion-select-option>
+          <ion-select-option value="10.50">9</ion-select-option>
+          <ion-select-option value="12.97">10</ion-select-option>
+          <ion-select-option value="15.86">11</ion-select-option>
+          <ion-select-option value="19.23">12</ion-select-option>
+          <ion-select-option value="23.16">13</ion-select-option>
+          <ion-select-option value="27.73">14</ion-select-option>
+          <ion-select-option value="33.03">15</ion-select-option>
+          <ion-select-option value="39.17">16</ion-select-option>
+          <ion-select-option value="46.26">17</ion-select-option>
+          <ion-select-option value="54.46">18</ion-select-option>
+          <ion-select-option value="63.90">19</ion-select-option>
+          <ion-select-option value="74.78">20</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;">
+        <ion-item>
+          <ion-input type="number" (ionChange)="onChangeVOLUMENTRABAJO($event)"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row (ionChange)="recalcularcarga()"
+      style="border-top: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   "
+      class="ion-align-items-center">
+      <ion-col size="4" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Intensidad pausa</ion-text>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Volumen pausa</ion-text>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;" class="ion-text-center">
+        <ion-text color="primary">Carga</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
+      <ion-col size="4" style="border-right: 1px solid #74af2d;">
+        <ion-select (ionChange)="Changeintensidadpausa($event)" interface="popover" style="font-size:10px;"
+          placeholder="6-20">
+          <ion-select-option value="5.09">6</ion-select-option>
+          <ion-select-option value="6.61">7</ion-select-option>
+          <ion-select-option value="8.39">8</ion-select-option>
+          <ion-select-option value="10.50">9</ion-select-option>
+          <ion-select-option value="12.97">10</ion-select-option>
+          <ion-select-option value="15.86">11</ion-select-option>
+          <ion-select-option value="19.23">12</ion-select-option>
+          <ion-select-option value="23.16">13</ion-select-option>
+          <ion-select-option value="27.73">14</ion-select-option>
+          <ion-select-option value="33.03">15</ion-select-option>
+          <ion-select-option value="39.17">16</ion-select-option>
+          <ion-select-option value="46.26">17</ion-select-option>
+          <ion-select-option value="54.46">18</ion-select-option>
+          <ion-select-option value="63.90">19</ion-select-option>
+          <ion-select-option value="74.78">20</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="4" style="border-right: 1px solid #74af2d;">
+        <ion-item>
+          <ion-input type="number" (ionChange)="OnchangeVOLUMENPAUSA($event)"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" style=" text-align: center; border-right: 1px solid #74af2d;" class="ion-align-items-center">
+        <ion-text>{{this.carga}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-text style="color:cornflowerblue; font-weight: 700;">Total</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4" class="ion-text-center">
+      </ion-col>
+      <ion-col size="4" class="ion-text-center"
+        style="border-bottom: 1px solid #74af2d; border-right: 1px solid #74af2d; border-left: 1px solid #74af2d;">
+        <ion-item lines="none" class="ion-align-items-center">
+          <ion-label position="floating">Total:</ion-label>
+          <ion-input *ngIf="this.contar!=0" readonly value="{{this.totalsumadevolumenes}}" color="primary"></ion-input>
+          <ion-input *ngIf="this.contar==0" readonly value="0" color="primary"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button (click)="guardar()" color="primary">Guardar Ejercicio</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

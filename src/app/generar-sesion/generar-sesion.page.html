@@ -1,0 +1,288 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generar sesiones de entrenamiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<section *ngIf="this.tipo_cuenta<10">
+    <ion-row class="ion-no-padding" no-padding>
+      <ion-col style="text-align: center; " size="2" class="ion-no-padding" no-padding>
+      </ion-col>
+      <ion-col size="8" style="text-align: center; " class="ion-no-padding"
+        no-padding><br><br><br><br><br><br><br><br><br><br>
+        <ion-text style="color: #303030;"><strong>No tienes permisos para navegar en esta Seccion Consultalo con el
+            Personal Tecnico de tu equipo.</strong></ion-text>
+      </ion-col>
+      <ion-col size="2" style="text-align: center; " class="ion-no-padding" no-padding>
+      </ion-col>
+    </ion-row>
+</section>
+
+<section *ngIf="this.tipo_cuenta>9">
+   <ion-grid class="ion-no-padding" no-padding>
+      <ion-row  no-padding>
+        <ion-col style="text-align: center; " size="0.3" class="ion-no-padding" no-padding>
+          <button color="primary" (click)="volveraatras()"><ion-icon name="arrow-back"></ion-icon></button>
+        </ion-col>
+        <ion-col style=" border: 1px solid #505050;" size="3.9" class="ion-text-center" no-padding>
+          <ion-text style="color:#89c53f">&nbsp;Nro&nbsp; sesion</ion-text><br>
+          <ion-text style="color:#303030">{{this.quizzseleccionadoquellega.numero_sesion}}</ion-text>
+        </ion-col>
+        <ion-col style=" border: 1px solid #505050;" size="3.9" class="ion-text-center" no-padding>
+          <ion-text style="color:#89c53f">Fecha sesion</ion-text><br>
+          <ion-text style="color:#303030">{{this.quizzseleccionadoquellega.dia_sesion}}</ion-text>
+        </ion-col>
+        <ion-col style=" border: 1px solid #505050;" size="3.9" class="ion-text-center" no-padding>
+          <ion-text style="color:#89c53f">&nbsp;Hora sesión</ion-text><br>
+          <ion-text style="color:#303030">{{this.quizzseleccionadoquellega.hora_sesion}}</ion-text>
+        </ion-col>
+
+      </ion-row>
+      <ion-row class="ion-no-padding" no-padding>
+        <ion-col size-lg="6" size-md="6"  size-sm="6" size-xl="6" size-xs="12" class="ion-align-items-center ion-text-center ion-no-padding" no-padding>
+          <ion-item class="ion-no-padding" no-padding style=" border: 1px solid #505050;">
+            <ion-label class="fuenteresponsive" position="stacked">Lugar de la Sesión</ion-label>
+            <ion-input placeholder="{{this.lugarsesion}}" (ionChange)="ONCHANGElugar($event)" type="text" ></ion-input>
+            <ion-button (click)="verlugarsesion()" class="ion-align-self-end nomargenporfa" slot="end" no-padding><ion-icon name="eye-outline"></ion-icon></ion-button>
+            <ion-button (click)="GUARDARlugarsesion()" class="ion-align-self-end nomargenporfa" slot="end" no-padding [disabled]="this.quebotonmostrarenlugar=='muestraeldesactivado'" size="small"><ion-icon name="save"></ion-icon></ion-button>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6"  size-sm="6" size-xl="6" size-xs="12"   class="ion-align-items-center ion-text-center" no-padding>
+          <ion-item class="ion-no-padding" no-padding style=" border: 1px solid #505050;">
+            <ion-label class="fuenteresponsive" position="stacked">Objetivos generales y especificos</ion-label>
+            <ion-input placeholder="{{this.objetivo1}}" (ionChange)="ONCHANGEobjetivo1($event)" type="text" ></ion-input>
+            <ion-button  (click)="verobjetivo1sesion()" class="ion-align-self-end nomargenporfa" slot="end" no-padding><ion-icon name="eye-outline"></ion-icon></ion-button>
+            <ion-button (click)="GUARDARobjetivo1()" [disabled]="this.quebotonmostrarenobjetivo1!='muestraelactivado'" class="ion-align-self-end nomargenporfa" slot="end" no-padding size="small"><ion-icon name="save"></ion-icon></ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-no-padding" no-padding>
+        <ion-col size-lg="6" size-md="6"  size-sm="6" size-xl="6" size-xs="12" class="ion-align-items-center ion-text-center ion-no-padding" no-padding>
+          <ion-item class="ion-no-padding" no-padding style=" border: 1px solid #505050;">
+            <ion-label class="fuenteresponsive" position="stacked">Objetivos de la sesion condicionales(habilidades a enseñar)</ion-label>
+            <ion-input  placeholder="{{this.objetivo2}}" (ionChange)="ONCHANGEobjetivo2($event)" type="text" ></ion-input>
+            <ion-button (click)="verobjetivo2sesion()" class="ion-align-self-end nomargenporfa" slot="end" no-padding><ion-icon name="eye-outline"></ion-icon></ion-button>
+            <ion-button (click)="GUARDARobjetivo2()" [disabled]="this.quebotonmostrarenobjetivo2!='muestraelactivado'" class="ion-align-self-end nomargenporfa" slot="end" no-padding size="small"><ion-icon name="save"></ion-icon></ion-button>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6"  size-sm="6" size-xl="6" size-xs="12"   class="ion-align-items-center ion-text-center" no-padding>
+          <ion-item class="ion-no-padding" no-padding style=" border: 1px solid #505050;">
+            <ion-label class="fuenteresponsive" position="stacked">Consignas (soluciones del contenido)</ion-label>
+            <ion-input readonly="true" placeholder="Sin Consigna aún" type="text" ></ion-input>
+            <ion-button readonly="true"  class="ion-align-self-end nomargenporfa" slot="end" no-padding><ion-icon name="eye-outline"></ion-icon></ion-button>
+            <ion-button readonly="true"  class="ion-align-self-end nomargenporfa" slot="end" no-padding size="small"><ion-icon name="save"></ion-icon></ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+
+      <!-- <ion-row style="border-top: 1px solid #89c53f; border-bottom: 1px solid #89c53f;" class="ion-align-items-center"
+        no-padding>
+
+        <ion-col size="6" class="ion-align-items-center ion-text-center" no-padding>
+          <ion-text style="font-size:small; color:#89c53f">Objetivos de la sesion condicionales</ion-text><br>
+          <ion-item>
+            <ion-label></ion-label>
+            <ion-input></ion-input>
+            <ion-button color="primary" ion-button large (click)="verobjetivo2sesion()" item-end>
+              <ion-icon name="eye-outline"></ion-icon> </ion-button>
+            <ion-button >
+              <ion-icon name="checkmark-done-outline"></ion-icon>
+            </ion-button>
+            <ion-button disabled *ngIf="this.quebotonmostrarenobjetivo2=='muestraeldesactivado'">
+              <ion-icon name="checkmark-done-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6" class="ion-align-items-center ion-text-center">
+            <ion-item>
+              <ion-input></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row> -->
+      <ion-row style="border-top: 1px solid #89c53f; border-bottom: 1px solid #89c53f;" class="ion-align-items-center"
+        no-padding>
+        <ion-col size="3" class="ion-align-items-center ion-text-center" no-padding>
+          <ion-text style="font-size:small; color:#89c53f">intensidad sesion (intencion subjetiva)</ion-text><br>
+          <ion-select value="{{this.intensidad_sesion}}" interface="popover" style="font-size: small;"
+            (ionChange)="ONCHANGEintensidad_sesion($event)">
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="7">7</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+            <ion-select-option value="9">9</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
+            <ion-select-option value="11">11</ion-select-option>
+            <ion-select-option value="12">12</ion-select-option>
+            <ion-select-option value="13">13</ion-select-option>
+            <ion-select-option value="14">14</ion-select-option>
+            <ion-select-option value="15">15</ion-select-option>
+            <ion-select-option value="16">16</ion-select-option>
+            <ion-select-option value="17">17</ion-select-option>
+            <ion-select-option value="18">18</ion-select-option>
+            <ion-select-option value="19">19</ion-select-option>
+            <ion-select-option value="20">20</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="2" class="ion-align-items-center ion-text-center" no-padding>
+          <ion-text style="font-size: small; color:#89c53f">Volumen sesion</ion-text><br>
+          <ion-text style=" font-size: small; color:#303030">{{respuestacontarvolumensesionparaseccion1}}</ion-text>
+        </ion-col>
+        <ion-col size="3" class="ion-no-padding ion-text-center" no-padding>
+          <ion-text style="font-size:small; color:#89c53f">Efectividad sesion (tiempo sin pausas)</ion-text><br>
+          <ion-item class="ion-no-padding" no-padding>
+            <ion-label></ion-label>
+            <ion-input *ngIf="this.efectividad_sesion>0&&this.efectividad_sesion<101" style="font-size: small;"
+              value="{{this.efectividad_sesion}}" (ionChange)="ONCHANGEefectividad_sesion($event)" type="number"
+              class="ion-no-padding" no-padding></ion-input>
+            <ion-input *ngIf="this.efectividad_sesion<0" style="font-size: small;" value="0"
+              (ionChange)="ONCHANGEefectividad_sesion($event)" type="number" class="ion-no-padding"
+              no-padding></ion-input>
+            <ion-input *ngIf="this.efectividad_sesion>100" style="font-size: small;" value="100"
+              (ionChange)="ONCHANGEefectividad_sesion($event)" type="number" class="ion-no-padding"
+              no-padding></ion-input>
+            <ion-input *ngIf="this.efectividad_sesion==0" style="font-size: small;" value="0"
+              (ionChange)="ONCHANGEefectividad_sesion($event)" type="number" class="ion-no-padding"
+              no-padding></ion-input>
+            <ion-text>%</ion-text>
+            <ion-button style="margin-right: -1%;" (click)="GUARDARefectividad_sesion()"
+              *ngIf="this.quebotonmostrarenefectividad_sesion=='muestraelactivado'">
+              <ion-icon style="font-size:small" name="checkmark-done-outline"></ion-icon>
+            </ion-button>
+            <ion-button style="margin-right: -1%;" disabled
+              *ngIf="this.quebotonmostrarenefectividad_sesion=='muestraeldesactivado'">
+              <ion-icon style="font-size:small" name="checkmark-done-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2" class="ion-align-items-center ion-text-center" no-padding>
+          <ion-text style="font-size:small; color:#89c53f">carga sesion subjetiva</ion-text><br>
+          <ion-text style="color:#303030">{{this.carga_sesion}}</ion-text>
+        </ion-col>
+        <ion-col size="2" class="ion-align-items-center ion-text-center" no-padding>
+          <ion-text style="font-size:small; color:#89c53f">Carga ejercicios</ion-text><br>
+          <ion-text style="color:#303030">{{this.respuestacontarcargasesionparaseccion1}}</ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-no-padding" no-padding>
+        <ion-col style="text-align: center; " size="0.1" class="ion-no-padding" no-padding>
+        </ion-col>
+        <ion-col size="11.8" style="text-align: justify; " class="ion-no-padding" no-padding>
+          <ion-text style="color: #303030;  font-size: small;">Aqui puedes crear sesiones de entrenamiento
+            para esta sesión, puedes generar ilimitadas sesiones de entrenamiento para cada
+            sesión.</ion-text>
+        </ion-col>
+        <ion-col size="0.1" style="text-align: center; " class="ion-no-padding" no-padding>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-padding" no-padding>
+        <ion-col style="text-align: center; " size="0.2" class="ion-no-padding" no-padding>
+        </ion-col>
+        <ion-col size="11.6" style="text-align: center; " class="ion-no-padding" no-padding>
+          <ion-button
+            *ngIf="this.tipo_cuenta>9&&this.botongenerarsesion=='activado'&&this.botongenerarsesion!='desactivado'"
+            (click)="generarejercicio()" style="font-size:small"><ion-text style="font-size: small;">Generar</ion-text>
+            <ion-icon style="color:#4472C4" name="add-circle-outline"></ion-icon> </ion-button>
+        </ion-col>
+        <ion-col size="0.2" style="text-align: center; " class="ion-no-padding" no-padding>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-padding" no-padding>
+        <ion-col style="text-align: center; " size="0.2" class="ion-no-padding" no-padding>
+        </ion-col>
+        <ion-col size="11.6" style="text-align: center; " class="ion-no-padding" no-padding>
+          <ion-text style="color: #303030;  font-size: small;"><strong>Sesiones de entr. Generadas
+              anteriormente:</strong></ion-text>
+        </ion-col>
+        <ion-col size="0.2" style="text-align: center; " class="ion-no-padding" no-padding>
+        </ion-col>
+      </ion-row>
+      <br>
+      <ion-list>
+        <ion-card *ngFor="let ejercicios of this.ejercicioscreadosanteriormente" style="background-color: #252525;">
+          <ion-row *ngIf="ejercicios.id_equipo!=undefined&&ejercicios.id_equipo!=null"
+            style="border-bottom: 1px solid #74af2d; border-top: 1px solid #74af2d  " class="ion-no-padding" no-padding>
+            <ion-col style="text-align: center; border-left: 1px solid #89c53f; border-right: 1px solid #72b124" size="3"
+              class="ion-no-padding" no-padding>
+              <ion-row class="ion-no-padding" no-padding>
+                <ion-col size="6">
+                  <ion-text style="color:#89c53f">Ej</ion-text><br>
+                  <ion-text style="color:white">{{ejercicios.nro_ejercicio_de_sesion}}</ion-text>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-text style="color:white">{{ejercicios.totalsumadevolumenes}}</ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-no-padding align-items-bottom" no-padding>
+                <ion-col style="margin-top: -0.125em">
+                  <br>
+                  <ion-text style="color:#89c53f">Int.</ion-text><br>
+                  <ion-text style="color:#89c53f">T:<strong
+                      style="color:white">{{ejercicios.intensidadtrabajo}}</strong></ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col style="text-align: center; border-left: 1px solid #89c53f; border-right: 1px solid #72b124" size="4"
+              class="ion-no-padding" no-padding>
+              <ion-text class="ion-no-padding" no-padding style=" font-size: small; color:#74af2d">img.
+                ejercicio</ion-text>
+              <img style="width: 80%; max-width: 80%;" class="ion-no-padding" no-padding src="assets/cancha.svg">
+            </ion-col>
+            <ion-col style="text-align: center; border-left: 1px solid #89c53f; border-right: 1px solid #89c53f" size="5"
+              class="ion-no-padding" no-padding>
+              <ion-text style=" font-size: small; color:#74af2d">Coment:</ion-text>
+              <ion-text style="color:white">{{ejercicios.comentario}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="ejercicios.id_equipo!=undefined&&ejercicios.id_equipo!=null" no-padding>
+            <ion-col size="0.75" no-padding> </ion-col>
+            <ion-col size="3" class="ion-align-items-center" no-padding>
+              <ion-button size="small">
+                <div>
+                  <p no-margin style="font-size: small;" text-lowercase><ion-label><ion-icon
+                        name="eye-outline"></ion-icon> Ver</ion-label></p>
+                </div>
+              </ion-button>
+            </ion-col>
+            <ion-col size="0.75" no-padding> </ion-col>
+            <ion-col size="3" class="ion-align-items-center" no-padding>
+              <ion-button size="small">
+                <div>
+                  <p no-margin style="font-size: small;" text-lowercase><ion-label><ion-icon
+                        name="create-outline"></ion-icon>Editar</ion-label></p>
+                </div>
+              </ion-button>
+            </ion-col>
+            <ion-col size="0.75" no-padding> </ion-col>
+            <ion-col size="3" class="ion-align-items-center" no-padding>
+              <ion-button (click)="eliminarejercicio($event, ejercicios)" size="small">
+                <div>
+                  <p no-margin style="font-size: small;" text-lowercase><ion-label><ion-icon
+                        name="trash-outline"></ion-icon>Eliminar</ion-label></p>
+                </div>
+              </ion-button>
+            </ion-col>
+            <ion-col size="0.75" no-padding> </ion-col>
+          </ion-row>
+          <ion-row *ngIf="ejercicios.id_equipo==undefined||ejercicios.id_equipo==null">
+            <ion-col class="ion-align-items-center">
+              <ion-button (click)="volveraatras()">
+                Recargar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-list>
+    </ion-grid>
+
+</section>
+
+
+
+</ion-content>

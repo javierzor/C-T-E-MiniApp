@@ -1,0 +1,50 @@
+
+.nomargenporfa{
+    margin: 0px 0px 0px 0px!important;
+}
+
+/* For responsiveness across screens */
+ion-label.fuenteresponsive {
+    font-size: 100%;
+    @media (max-width: 289px) {
+        font-size: 55%;
+    }
+    @media (min-width: 290px) {
+        font-size: 60%;
+    }
+    @media (min-width: 300px) {
+        font-size: 62.5%;
+    }
+    @media (min-width: 320px) {
+        font-size: 65.5%;
+    }
+    @media (min-width: 325px) {
+        font-size: 66.5%;
+    }
+    @media (min-width: 326px) {
+        font-size: 67%;
+    }
+    @media (min-width: 330px) {
+        font-size: 69%;
+    }
+    @media (min-width: 360px) {
+        font-size: 72.5%;
+    }
+    @media (min-width: 411px) {
+        font-size: 80%;
+    }
+    @media (min-width: 500px) {
+        font-size: 95%;
+    }
+    @media (min-width: 720px) {
+        font-size: 105%;
+    }
+    @media (min-width: 1000px) {
+        font-size: 110%;
+    }
+  }
+  ion-label.fuenteresponsive.ios {
+    @media (max-width: 359px) and (min-width: 320px) {
+        font-size: 59%;
+    }
+  }
