@@ -51,42 +51,74 @@
       style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
         <ion-select interface="popover" style="font-size: small;" style="font-size: small;" placeholder="¿tarea?"
-          (ionChange)="B63($event)">
-          <ion-select-option value="Recuperación">Recuperación</ion-select-option>
-          <ion-select-option value="Core">Core</ion-select-option>
-          <ion-select-option value="Compensatorio">Compensatorio</ion-select-option>
-          <ion-select-option value="Calentamiento">Calentamiento</ion-select-option>
-          <ion-select-option value="Balón parado">Balón parado</ion-select-option>
-          <ion-select-option value="Fuerza">Fuerza</ion-select-option>
-          <ion-select-option value="Trabajo táctico">Trabajo táctico</ion-select-option>
-          <ion-select-option value="Circuito físico">Circuito físico</ion-select-option>
-          <ion-select-option value="Rueda de pases">Rueda de pases</ion-select-option>
-          <ion-select-option value="Juego reducido">Juego reducido</ion-select-option>
-          <ion-select-option value="Partido de entrenamiento">Partido de entrenamiento</ion-select-option>
-          <ion-select-option value="Partido oficial">Partido oficial</ion-select-option>
-          <ion-select-option value="1 vs 1">1 vs 1</ion-select-option>
-          <ion-select-option value="Sprint">Sprint</ion-select-option>
+          (ionChange)=" calcular(
+            tarea.value,
+            jugadores.value,
+            equipos.value,
+            nivel.value,
+            intensidad.value,
+            balones.value,
+            interrupciones.value
+          )" #tarea>
+          <ion-select-option value="0">Recuperacion</ion-select-option>
+          <ion-select-option value="0">Core</ion-select-option>
+          <ion-select-option value="10">Compensatoio</ion-select-option>
+          <ion-select-option value="11">Calentamiento/BalonParado</ion-select-option>
+          <!-- <ion-select-option value="11">Balon parado</ion-select-option> -->
+          <ion-select-option value="13">Fuerza</ion-select-option>
+          <ion-select-option value="12">Trabajo Tactico</ion-select-option>
+          <ion-select-option value="13">Circuito Fisico</ion-select-option>
+          <ion-select-option value="14">ruedas de pases</ion-select-option>
+          <ion-select-option value="15">Juego Reducido</ion-select-option>
+          <ion-select-option value="13">Partido de Entrenamiento</ion-select-option>
+          <ion-select-option value="15">Partido Oficial</ion-select-option>
+          <ion-select-option value="16">1 vs 1</ion-select-option>
+          <ion-select-option value="18">Sprint</ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-select interface="popover" style="font-size: small;" placeholder="¿rango?" (ionChange)="C63($event)">
-          <ion-select-option value="2 a 3">2 a 3</ion-select-option>
-          <ion-select-option value="4 a 6">4 a 6</ion-select-option>
-          <ion-select-option value="7 a 10">7 a 10</ion-select-option>
+        <ion-select interface="popover" style="font-size: small;" placeholder="¿rango?" (ionChange)=" calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )" #jugadores>
+          <ion-select-option value="-1">2 a 3</ion-select-option>
+          <ion-select-option value="-2">4 a 6</ion-select-option>
+          <ion-select-option value="-3">7 a 10</ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-select interface="popover" style="font-size: small;" placeholder="Nro Eq..?" (ionChange)="D63($event)">
-          <ion-select-option value="2">2</ion-select-option>
-          <ion-select-option value="3">3</ion-select-option>
-          <ion-select-option value="4">4</ion-select-option>
+        <ion-select interface="popover" style="font-size: small;" placeholder="Nro Eq..?" (ionChange)=" calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )" #equipos>
+          <ion-select-option value="0">2</ion-select-option>
+          <ion-select-option value="-1">3</ion-select-option>
+          <ion-select-option value="-1">4</ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col size="3">
-        <ion-select interface="popover" style="font-size: small;" placeholder="Nivel?" (ionChange)="E63($event)">
-          <ion-select-option value="bajo">bajo</ion-select-option>
-          <ion-select-option value="medio">medio</ion-select-option>
-          <ion-select-option value="alto">alto</ion-select-option>
+        <ion-select interface="popover" style="font-size: small;" placeholder="Nivel?" (ionChange)=" calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )" #nivel>
+          <ion-select-option value="-1">bajo</ion-select-option>
+          <ion-select-option value="0">medio</ion-select-option>
+          <ion-select-option value="1">alto</ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
@@ -108,28 +140,52 @@
     <ion-row
       style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-select interface="popover" style="font-size: small;" placeholder="Int.?" (ionChange)="F63($event)">
-          <ion-select-option value="Parado (casi)">Parado (casi)</ion-select-option>
-          <ion-select-option value="Baja">Baja</ion-select-option>
-          <ion-select-option value="Media">Media</ion-select-option>
-          <ion-select-option value="Alta">Alta</ion-select-option>
+        <ion-select interface="popover" style="font-size: small;" placeholder="Int.?" (ionChange)=" calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )" #intensidad>
+          <ion-select-option value="-2">Parado (casi)</ion-select-option>
+          <ion-select-option value="-1">Baja</ion-select-option>
+          <ion-select-option value="0">Media</ion-select-option>
+          <ion-select-option value="1">Alta</ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-input readonly value="{{this.mostrarmetroscuadradosporjugador}}"></ion-input>
+        <ion-input readonly [value]="mostrarmetroscuadradosporjugador"></ion-input>
       </ion-col>
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-select interface="popover" style="font-size: small;" placeholder="Nº" (ionChange)="H63($event)">
-          <ion-select-option value="1">1</ion-select-option>
-          <ion-select-option value="2">2</ion-select-option>
-          <ion-select-option value="3">>3</ion-select-option>
+        <ion-select interface="popover" style="font-size: small;" placeholder="Nº" (ionChange)=" calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )" #balones>
+          <ion-select-option value="0">1</ion-select-option>
+          <ion-select-option value="1">2</ion-select-option>
+          <ion-select-option value="-1">>3</ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col size="3">
-        <ion-select interface="popover" style="font-size: small;" placeholder="int." (ionChange)="I63($event)">
-          <ion-select-option value="Frecuentes">Frecuentes</ion-select-option>
-          <ion-select-option value="Casi siempre">Casi siempre</ion-select-option>
-          <ion-select-option value="Sin parar">Sin parar</ion-select-option>
+        <ion-select interface="popover" style="font-size: small;" placeholder="int." (ionChange)=" calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )" #interrupciones>
+          <ion-select-option value="-2">Frecuentes</ion-select-option>
+          <ion-select-option value="-1">Casi siempre</ion-select-option>
+          <ion-select-option value="0">Sin parar</ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
@@ -148,19 +204,27 @@
         <ion-text color="primary">m/2 Jugador</ion-text>
       </ion-col>
     </ion-row>
-    <ion-row (ionChange)="recalculadodeM2PORjug()"
+    <ion-row (ionChange)="recalculadodeM2PORjug(m2jugadores.value,m2lado1.value,m2lado2.value)"
       style="border-bottom: 1px solid #74af2d; border-left: 1px solid #74af2d; border-right: 1px solid #74af2d   ">
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-input (ionChange)="B15($event)" placeholder="0"></ion-input>
+        <ion-input type="number" placeholder="0" #m2jugadores></ion-input>
+      </ion-col>
+      <ion-col  size="3" style="border-right: 1px solid #74af2d;">
+        <ion-input type="number"  placeholder="0" #m2lado1></ion-input>
       </ion-col>
       <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-input (ionChange)="C15($event)" placeholder="0"></ion-input>
-      </ion-col>
-      <ion-col size="3" style="border-right: 1px solid #74af2d;">
-        <ion-input (ionChange)="D15($event)" placeholder="0"></ion-input>
+        <ion-input type="number"  placeholder="0" #m2lado2></ion-input>
       </ion-col>
       <ion-col size="3">
-        <ion-input readonly value="{{this.e15}}" type="number" id="numberInput"></ion-input>
+        <ion-input readonly [value]="m2calculado" type="number" id="numberInput"   (ionChange)="calcular(
+          tarea.value,
+          jugadores.value,
+          equipos.value,
+          nivel.value,
+          intensidad.value,
+          balones.value,
+          interrupciones.value
+        )"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center ion-no-padding" no-padding>
@@ -172,7 +236,7 @@
             <ion-card-title style="font-size: small;" class="ion-no-padding" no-padding>Valor<br></ion-card-title>
           </ion-card-header>
           <ion-card-content class="ion-no-padding" no-padding>
-            <ion-input ionChange="ONCHANGEvalor($event)" placeholder="valor"></ion-input>
+            <ion-input [value]="valorCalculado" placeholder="valor"></ion-input>
           </ion-card-content>
         </ion-card>
       </ion-col>
