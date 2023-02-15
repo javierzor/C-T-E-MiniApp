@@ -210,7 +210,7 @@ export class CrearEjercicioPage implements OnInit {
       carga: this.carga,
     };
     console.log('informacion a guardar:', data);
-    /* const guardado = await this.loadingController.create({
+    const guardado = await this.loadingController.create({
       message: 'Ejercicio Guardado',
       spinner: 'bubbles',
       duration: 1600,
@@ -232,7 +232,7 @@ export class CrearEjercicioPage implements OnInit {
       } else {
         verifique.present();
       }
-    }); */
+    });
   }
 
   calcular(
