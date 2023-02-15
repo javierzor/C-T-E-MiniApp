@@ -175,6 +175,10 @@ export class CrearEjercicioPage implements OnInit {
     }
   }
   async guardar() {
+    if (!this.valorCalculado) {
+      console.log('Falta llenar los datos del ejercicio');
+      return;
+    }
     var data = {
       nombre_solicitud: 'guardarejercicio',
       id_sesion: this.quizzseleccionadoquellega.id_sesion,
@@ -231,14 +235,14 @@ export class CrearEjercicioPage implements OnInit {
     balones: string,
     interrupciones: string
   ) {
-    console.log('tarea:', tarea);
+    /*  console.log('tarea:', tarea);
     console.log('jugadores:', jugadores);
     console.log('equipos:', parseInt(equipos));
     console.log('nivel:', nivel);
     console.log('intesidad:', intensidad);
     console.log('metros:', this.metros);
     console.log('balones:', balones);
-    console.log('interrupciones:', interrupciones);
+    console.log('interrupciones:', interrupciones); */
     if (
       tarea &&
       jugadores &&
@@ -269,15 +273,18 @@ export class CrearEjercicioPage implements OnInit {
         this.metros +
         parseInt(balones) +
         parseInt(interrupciones);
-      console.log('valorCalculado', this.valorCalculado);
+
       let factor = 0;
       if (tarea === '16' && interrupciones === '-2') {
         factor = -2;
       } else if (tarea === '16' && interrupciones === '-1') {
         factor = -1;
       }
-      console.log('Factor:', factor);
+
       this.valorCalculado + factor;
+      console.log('Se Calculo el Valor:', this.valorCalculado);
+    } else {
+      this.valorCalculado = null;
     }
   }
 }
