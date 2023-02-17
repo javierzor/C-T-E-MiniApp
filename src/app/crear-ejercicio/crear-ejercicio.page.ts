@@ -6,12 +6,42 @@ import { NavController, LoadingController, AlertController } from '@ionic/angula
 import { Location } from "@angular/common";
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'app-crear-ejercicio',
   templateUrl: './crear-ejercicio.page.html',
   styleUrls: ['./crear-ejercicio.page.scss'],
 })
 export class CrearEjercicioPage implements OnInit {
+  ejercicioForm = this.fb.group({
+    tarea: new FormControl<number | null>(null, [Validators.required]),
+    jugadoresequipo: new FormControl<number | null>(null, Validators.required),
+    equipos: new FormControl<number | null>(null, Validators.required),
+    nivel: new FormControl<number | null>(null, Validators.required),
+    intensidad: new FormControl<number | null>(null, Validators.required),
+    m2: new FormControl<string | null>(null, [Validators.required]),
+    m2valor: new FormControl<number | null>(null, [Validators.required]),
+    balones: new FormControl<number | null>(null, Validators.required),
+    interrupciones: new FormControl<number | null>(null, Validators.required),
+    jugadores: new FormControl<number | null>(null, Validators.max(25)),
+    lado1: new FormControl<number | null>(null, Validators.max(100)),
+    lado2: new FormControl<number | null>(null, [
+      Validators.max(100),
+      Validators.min(0),
+    ]),
+    m2jugadores: new FormControl<number | null>(null),
+    valortom: new FormControl<number | null>(null),
+  });
+  cargaForm = this.fb.group({
+    volumentrabajo: new FormControl<number | null>(null, Validators.max(180)),
+    volumenpausa: new FormControl<number | null>(null, Validators.max(180)),
+  });
   totalmanualtemporal: any;
   mostrarjugadoresporquipo: any;
   mostrarmetroscuadradosporjugador: string = 'auto';
@@ -33,26 +63,6 @@ export class CrearEjercicioPage implements OnInit {
   volumenpausamultiplicable: any;
   carga: any;
 
-  valorCalculado: number;
-  metros: number = null;
-  m2calculado: number;
-  datosTOM: {
-    tarea: number;
-    jugadores: number;
-    equipos: number;
-    nivel: number;
-    intensidad: number;
-    balones: number;
-    interrupciones: number;
-    metros: number;
-
-    m2?: {
-      jugadores?: number;
-      lado1?: number;
-      lado2?: number;
-      m2jugador?: number;
-    };
-  };
   constructor(
     private location: Location,
     private router: Router,
@@ -62,7 +72,8 @@ export class CrearEjercicioPage implements OnInit {
     public loading: LoadingController,
     private route: ActivatedRoute,
     public modalCtrl: ModalController,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private fb: FormBuilder
   ) {
     this.contar = 'SI';
     this.carga = 0;
@@ -95,41 +106,29 @@ export class CrearEjercicioPage implements OnInit {
     this.router.navigate(['/generar-sesion', this.quizzseleccionadoquellega]);
   }
 
-  recalculadodeM2PORjug(
-    m2jugadores: number | string,
-    m2lado1: number | string,
-    m2lado2: number | string
-  ) {
-    console.log('recalculando metros al cuadrado por jugador');
-    if (!this.datosTOM.m2) this.datosTOM.m2 = {};
-    this.datosTOM.m2.lado1 = m2lado1 as number;
-    this.datosTOM.m2.lado2 = m2lado2 as number;
-    this.datosTOM.m2.jugadores = m2jugadores as number;
+  recalculadodeM2PORjug() {
+    //if (!this.datosTOM.m2) this.datosTOM.m2 = {};
 
-    if (m2jugadores == 0 || m2lado1 == 0 || m2lado2 == 0) return;
-    this.m2calculado =
-      ((m2lado1 as number) * (m2lado2 as number)) / (m2jugadores as number);
-    if (this.m2calculado < 40) {
-      this.mostrarmetroscuadradosporjugador = '<40';
-      this.metros = 0;
+    if (this.m2jugadores.value < 40) {
+      this.m2Control.setValue('<40');
+      this.ejercicioForm.controls.m2valor.setValue(0);
     }
-    if (this.m2calculado > 39 && this.m2calculado < 66) {
-      this.mostrarmetroscuadradosporjugador = '40-65';
-      this.metros = 1;
+    if (this.m2jugadores.value > 39 && this.m2jugadores.value < 66) {
+      this.m2Control.setValue('40-65');
+      this.ejercicioForm.controls.m2valor.setValue(1);
     }
-    if (this.m2calculado > 64 && this.m2calculado < 91) {
-      this.mostrarmetroscuadradosporjugador = '65-90';
-      this.metros = 2;
+    if (this.m2jugadores.value > 64 && this.m2jugadores.value < 91) {
+      this.m2Control.setValue('65-90');
+      this.ejercicioForm.controls.m2valor.setValue(2);
     }
-    if (this.m2calculado > 89 && this.m2calculado < 141) {
-      this.mostrarmetroscuadradosporjugador = '90-140';
-      this.metros = 3;
+    if (this.m2jugadores.value > 89 && this.m2jugadores.value < 141) {
+      this.m2Control.setValue('90-140');
+      this.ejercicioForm.controls.m2valor.setValue(3);
     }
-    if (this.m2calculado > 140) {
-      this.mostrarmetroscuadradosporjugador = '>40';
-      this.metros = 3;
+    if (this.m2jugadores.value > 140) {
+      this.m2Control.setValue('>40');
+      this.ejercicioForm.controls.m2valor.setValue(3);
     }
-    this.datosTOM.m2.m2jugador = this.m2calculado;
   }
 
   ONCHANGETOTALMANUALTEMPORAL(event) {
@@ -153,6 +152,8 @@ export class CrearEjercicioPage implements OnInit {
   }
   OnchangeVOLUMENPAUSA(event) {
     console.log('onchange Vol. Pausa', event.target.value);
+    console.log('Volumen Pausa:', this.volumenpausaControl.value);
+    this.limitarVolumenes();
     this.volumenpausa = event.target.value;
     this.volumenpausamultiplicable = event.target.value;
     this.totalsumadevolumenes =
@@ -160,6 +161,7 @@ export class CrearEjercicioPage implements OnInit {
     this.recalcularcarga();
   }
   onChangeVOLUMENTRABAJO(event) {
+    this.limitarVolumenes();
     console.log('onchange Vol. Trabajo', event.target.value);
     this.volumentrabajo = event.target.value;
     this.volumentrabajomultiplicable = event.target.value;
@@ -193,7 +195,7 @@ export class CrearEjercicioPage implements OnInit {
       id_sesion: this.quizzseleccionadoquellega.id_sesion,
       id_equipo: this.quizzseleccionadoquellega.id_equipo,
       //variables de TOM
-      datosTOM: this.datosTOM,
+      datosTOM: this.ejercicioForm.value,
       //
 
       totalmanualtemporal: this.totalmanualtemporal,
@@ -220,7 +222,7 @@ export class CrearEjercicioPage implements OnInit {
       spinner: 'bubbles',
       duration: 1300,
     });
-    this.json.funcionesdecrearejercicio(data).subscribe((res: any) => {
+    /* this.json.funcionesdecrearejercicio(data).subscribe((res: any) => {
       console.log('res', res);
       if (res.id > 0) {
         console.log('guardado, mostrando alerta exitosa');
@@ -232,68 +234,123 @@ export class CrearEjercicioPage implements OnInit {
       } else {
         verifique.present();
       }
-    });
+    }); */
   }
 
-  calcular(
-    tarea: string,
-    jugadores: string,
-    equipos: string,
-    nivel: string,
-    intensidad: string,
-    balones: string,
-    interrupciones: string
-  ) {
-    console.log('tarea:', tarea);
-    console.log('jugadores:', jugadores);
-    console.log('equipos:', parseInt(equipos));
-    console.log('nivel:', nivel);
-    console.log('intesidad:', intensidad);
-    console.log('metros:', this.metros);
-    console.log('balones:', balones);
-    console.log('interrupciones:', interrupciones);
-    this.datosTOM = {
-      tarea: parseInt(tarea),
-      equipos: parseInt(equipos),
-      jugadores: parseInt(jugadores),
-      nivel: parseInt(nivel),
-      intensidad: parseInt(intensidad),
-      metros: this.metros,
-      balones: parseInt(balones),
-      interrupciones: parseInt(interrupciones),
-    };
+  calcularTom() {
+    console.log('Calculando Tom', this.ejercicioForm.value);
+    console.log('Calculando Tom', this.ejercicioForm.status);
+    if (this.ejercicioForm.status === 'INVALID') return;
+    let valorTom =
+      this.tareaControl.value +
+      this.equiposControl.value +
+      this.jugadoresequipoControl.value +
+      this.nivelControl.value +
+      this.intensidadControl.value +
+      this.balonesControl.value +
+      this.interrupcionesControl.value +
+      this.m2valorControl.value;
+    let factor = 0;
+    console.log('TOM', valorTom);
     if (
-      tarea &&
-      jugadores &&
-      equipos &&
-      nivel &&
-      intensidad &&
-      this.metros >= 0 &&
-      balones &&
-      interrupciones
+      this.tareaControl.value === 16 &&
+      this.interrupcionesControl.value === -2
     ) {
-      console.log('Valores Correctos');
-      this.valorCalculado =
-        parseInt(tarea) +
-        parseInt(equipos) +
-        parseInt(jugadores) +
-        parseInt(nivel) +
-        parseInt(intensidad) +
-        this.metros +
-        parseInt(balones) +
-        parseInt(interrupciones);
-
-      let factor = 0;
-      if (tarea === '16' && interrupciones === '-2') {
-        factor = -2;
-      } else if (tarea === '16' && interrupciones === '-1') {
-        factor = -1;
-      }
-
-      this.valorCalculado + factor;
-      console.log('Se Calculo el Valor:', this.valorCalculado);
-    } else {
-      this.valorCalculado = null;
+      factor = -2;
+    } else if (
+      this.tareaControl.value === 16 &&
+      this.interrupcionesControl.value === -1
+    ) {
+      factor = -1;
     }
+    valorTom = valorTom + factor;
+    this.ejercicioForm.controls.valortom.setValue(valorTom);
+  }
+  calcularm2() {
+    console.log('Calculando M2');
+    if (this.lado1.value && this.lado2.value && this.jugadores.value) {
+      console.log(this.lado1.value, this.lado2.value, this.jugadores.value);
+      this.m2jugadores.setValue(
+        (this.lado1.value * this.lado2.value) / this.jugadores.value
+      );
+      this.recalculadodeM2PORjug();
+      this.calcularTom();
+    }
+  }
+  limitarjugadores() {
+    console.log('LimitarJugadores');
+    console.log(this.jugadores.value);
+    if (this.jugadores.value > 25) this.jugadores.setValue(25);
+    if (this.jugadores.value < 0) this.jugadores.setValue(0);
+    this.calcularm2();
+  }
+  limitarlados() {
+    console.log('Limitar lados');
+    if (this.lado1.value > 100) this.lado1.setValue(100);
+    if (this.lado2.value > 100) this.lado2.setValue(100);
+    if (this.lado1.value < 0) this.lado1.setValue(0);
+    if (this.lado2.value < 0) this.lado2.setValue(0);
+    this.calcularm2();
+  }
+  limitarVolumenes() {
+    if (this.volumenpausaControl.value > 180)
+      this.volumenpausaControl.setValue(180);
+    if (this.volumentrabajoControl.value > 180)
+      this.volumentrabajoControl.setValue(180);
+    if (this.volumenpausaControl.value < 0)
+      this.volumenpausaControl.setValue(0);
+    if (this.volumentrabajoControl.value < 0)
+      this.volumentrabajoControl.setValue(0);
+  }
+
+  get jugadores() {
+    return this.ejercicioForm.controls.jugadores;
+  }
+  get lado1() {
+    return this.ejercicioForm.controls.lado1;
+  }
+  get lado2() {
+    return this.ejercicioForm.controls.lado2;
+  }
+  get m2jugadores() {
+    return this.ejercicioForm.controls.m2jugadores;
+  }
+
+  get volumenpausaControl() {
+    return this.cargaForm.controls.volumenpausa;
+  }
+  get volumentrabajoControl() {
+    return this.cargaForm.controls.volumentrabajo;
+  }
+  get tareaControl() {
+    return this.ejercicioForm.controls.tarea;
+  }
+  get equiposControl() {
+    return this.ejercicioForm.controls.equipos;
+  }
+  get nivelControl() {
+    return this.ejercicioForm.controls.nivel;
+  }
+  get intensidadControl() {
+    return this.ejercicioForm.controls.intensidad;
+  }
+  get m2Control() {
+    return this.ejercicioForm.controls.m2;
+  }
+  get balonesControl() {
+    return this.ejercicioForm.controls.balones;
+  }
+  get interrupcionesControl() {
+    return this.ejercicioForm.controls.interrupciones;
+  }
+  get jugadoresequipoControl() {
+    return this.ejercicioForm.controls.jugadoresequipo;
+  }
+
+  get valorControl() {
+    return this.ejercicioForm.controls.valortom;
+  }
+  get m2valorControl() {
+    return this.ejercicioForm.controls.m2valor;
   }
 }
